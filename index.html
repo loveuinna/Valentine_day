@@ -1091,10 +1091,10 @@
                 }, msg.delay);
             });
 
-            // Add romantic heart GIF
+            // Add custom photo
             const gifContainer = document.createElement('div');
             gifContainer.classList.add('gif-container');
-            gifContainer.innerHTML = '<img src="https://media.giphy.com/media/l0HlSQG6B8KNuaRri/giphy.gif" alt="Romantic hearts">';
+            gifContainer.innerHTML = '<img src="photo.jpg" alt="Special moment">';
             document.getElementById('mainContent').appendChild(gifContainer);
             
             // Typewriter ending after 10 seconds
@@ -1209,6 +1209,7 @@
             
             const gameArea = document.getElementById('catchGameArea');
             const scoreDisplay = document.getElementById('catchScore');
+            let catSpawned = false;
             
             // Spawn falling hearts
             gameInterval = setInterval(() => {
@@ -1216,6 +1217,46 @@
                     clearInterval(gameInterval);
                     gameArea.innerHTML = '<div style="color: white; font-size: 24px; padding: 50px; line-height: 1.6;">You caught my heart, Inna.<br>Now you\'re stuck with me 💘</div>';
                     return;
+                }
+                
+                // Spawn cat emoji after 6-7 hearts (only once)
+                if (score >= 6 && score <= 7 && !catSpawned && Math.random() > 0.5) {
+                    catSpawned = true;
+                    const cat = document.createElement('div');
+                    cat.classList.add('falling-heart');
+                    cat.innerHTML = '🐱';
+                    cat.style.left = Math.random() * (gameArea.offsetWidth - 50) + 'px';
+                    cat.style.top = '-50px';
+                    cat.style.fontSize = '45px';
+                    
+                    cat.addEventListener('click', () => {
+                        cat.remove();
+                        clearInterval(gameInterval);
+                        
+                        // Show Anton the cat!
+                        gameArea.innerHTML = `
+                            <div style="text-align: center; padding: 20px;">
+                                <div style="color: white; font-size: 28px; font-weight: 700; margin-bottom: 20px;">
+                                    🎉 You found Anton! 🐱
+                                </div>
+                                <img src="cat.jpg" style="max-width: 100%; max-height: 250px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);" alt="Anton the cat">
+                            </div>
+                        `;
+                    });
+                    
+                    gameArea.appendChild(cat);
+                    
+                    // Animate cat falling
+                    let catPosition = -50;
+                    const catFallInterval = setInterval(() => {
+                        catPosition += 2;
+                        cat.style.top = catPosition + 'px';
+                        
+                        if (catPosition > gameArea.offsetHeight) {
+                            cat.remove();
+                            clearInterval(catFallInterval);
+                        }
+                    }, 30);
                 }
                 
                 const heart = document.createElement('div');
