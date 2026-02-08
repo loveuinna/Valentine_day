@@ -412,86 +412,6 @@
             box-shadow: 0 5px 20px rgba(255, 255, 255, 0.3);
         }
 
-        /* Spinning Wheel */
-        .wheel-container {
-            position: relative;
-            width: 350px;
-            height: 350px;
-            margin: 20px auto;
-        }
-
-        .wheel {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            border: 15px solid white;
-            position: relative;
-            transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-        }
-
-        .wheel-slice {
-            position: absolute;
-            width: 50%;
-            height: 50%;
-            top: 0;
-            left: 50%;
-            transform-origin: 0% 100%;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            padding-right: 20px;
-            font-weight: 600;
-            font-size: 14px;
-            color: white;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-        }
-
-        .wheel-pointer {
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 15px solid transparent;
-            border-right: 15px solid transparent;
-            border-top: 30px solid #feca57;
-            z-index: 10;
-            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
-        }
-
-        .spin-btn {
-            background: linear-gradient(135deg, #ff6b9d, #feca57);
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            border-radius: 30px;
-            font-size: 20px;
-            font-weight: 700;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(255, 107, 157, 0.5);
-        }
-
-        .spin-btn:hover {
-            transform: scale(1.05);
-        }
-
-        .spin-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .wheel-result {
-            color: white;
-            font-size: 24px;
-            font-weight: 700;
-            margin-top: 20px;
-            min-height: 30px;
-        }
-
         /* Celebration hearts */
         .celebration-heart {
             position: fixed;
@@ -524,7 +444,7 @@
 
         .photo-1:hover {
             transform: rotate(8deg) scale(1.1);
-            z-index: 6;
+            z-index: 101;
         }
 
         .photo-2 {
@@ -536,7 +456,7 @@
 
         .photo-2:hover {
             transform: translateY(-50%) rotate(-6deg) scale(1.1);
-            z-index: 6;
+            z-index: 101;
         }
 
         .photo-frame img {
@@ -603,8 +523,11 @@
                         0 0 20px rgba(255, 107, 157, 0.3);
             border: 8px solid rgba(255, 255, 255, 0.9);
             transition: transform 0.3s ease;
-            z-index: 5;
+            z-index: 100;
             animation: fadeIn 1s ease-out, photoGlow 3s ease-in-out infinite;
+            cursor: pointer;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
         }
 
         @keyframes photoGlow {
@@ -646,6 +569,11 @@
             0%, 100% { transform: translateX(0); }
             10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
             20%, 40%, 60%, 80% { transform: translateX(10px); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
         }
 
         /* Video overlay */
@@ -789,16 +717,18 @@
     <script>
         // Questions array
         const questions = [
-            "Will you make me the luckiest guy alive this Valentine's? 💖",
-            "Can I proudly say that you're mine? 😏💘",
+            "Will you make me the luckiest guy alive this Valentine's, Zhanm? 💖",
+            "Can I proudly say that you're mine, Inna? 😏💘",
             "So… are we officially that cute couple now? 😌💕",
-            "Are we about to have the most romantic summer ever? ☀️💞"
+            "Are we about to have the most romantic summer ever, Zhanm? ☀️💞"
         ];
 
         let currentQuestion = 0;
         let yesButtonScale = 1;
         let musicStarted = false;
         let noClickCount = 0;
+        let heartClickCount = 0;
+        let easterEggTriggered = false;
         
         const noButtonTexts = [
             "No 😈",
@@ -1087,10 +1017,7 @@
         }
 
         // Final celebration screen
-        async function showFinalCelebration() {
-            // Play video first
-            await playVideo();
-            
+        function showFinalCelebration() {
             // Clear content
             document.getElementById('mainContent').innerHTML = '';
 
@@ -1138,15 +1065,15 @@
             // Add final message
             const finalMessage = document.createElement('div');
             finalMessage.classList.add('final-message');
-            finalMessage.textContent = "It's official. You're stuck with me now. No refunds. 😌💖";
+            finalMessage.textContent = "It's official, Zhanm. You're stuck with me now. No refunds. 😌💖";
             document.getElementById('mainContent').appendChild(finalMessage);
 
-            // Add animated messages
+            // Add animated messages with better spacing so they don't overlap
             const messages = [
-                { text: "I love you 💕", delay: 2000, duration: 3000, top: '20%', left: '15%' },
-                { text: "Waiting till summer ☀️💖", delay: 3500, duration: 3000, top: '30%', right: '15%' },
-                { text: "You're my everything 💞", delay: 5000, duration: 3000, top: '70%', left: '20%' },
-                { text: "Can't wait for our adventures 🌟", delay: 6500, duration: 3000, top: '65%', right: '20%' }
+                { text: "I love you, Inna 💕", delay: 2000, duration: 4000, top: '15%', left: '10%' },
+                { text: "Waiting till summer ☀️💖", delay: 3000, duration: 4000, top: '25%', right: '10%' },
+                { text: "You're my everything, Zhanm 💞", delay: 4000, duration: 4000, top: '75%', left: '10%' },
+                { text: "Can't wait for our adventures 🌟", delay: 5000, duration: 4000, top: '85%', right: '10%' }
             ];
 
             messages.forEach(msg => {
@@ -1164,10 +1091,10 @@
                 }, msg.delay);
             });
 
-            // Add big heart GIF
+            // Add romantic heart GIF
             const gifContainer = document.createElement('div');
             gifContainer.classList.add('gif-container');
-            gifContainer.innerHTML = '<img src="https://media.giphy.com/media/G96zgIcQn1L2xpmdxi/giphy.gif" alt="Big beating heart">';
+            gifContainer.innerHTML = '<img src="https://media.giphy.com/media/l0HlSQG6B8KNuaRri/giphy.gif" alt="Romantic hearts">';
             document.getElementById('mainContent').appendChild(gifContainer);
             
             // Typewriter ending after 10 seconds
@@ -1202,7 +1129,7 @@
                 document.body.appendChild(blackScreen);
                 
                 // Typewriter effect
-                const finalText = "This wasn't just a website. I made this because you matter. Every line of code, every animation, every heart... all for you. 💖";
+                const finalText = "This wasn't just a website, Inna. I made this because you matter. Every line of code, every animation, every heart... all for you. 💖";
                 let charIndex = 0;
                 
                 const typeInterval = setInterval(() => {
@@ -1287,7 +1214,7 @@
             gameInterval = setInterval(() => {
                 if (score >= 10) {
                     clearInterval(gameInterval);
-                    gameArea.innerHTML = '<div style="color: white; font-size: 24px; padding: 50px; line-height: 1.6;">You caught my heart.<br>Now you\'re stuck with me 💘</div>';
+                    gameArea.innerHTML = '<div style="color: white; font-size: 24px; padding: 50px; line-height: 1.6;">You caught my heart, Inna.<br>Now you\'re stuck with me 💘</div>';
                     return;
                 }
                 
@@ -1334,7 +1261,7 @@
             }, 800);
         }
 
-        // Spin the Love Wheel Game
+        // Build a Word Game (Personalized for Inna)
         function startSpinWheelGame() {
             const overlay = document.createElement('div');
             overlay.classList.add('game-overlay');
@@ -1342,87 +1269,236 @@
             const container = document.createElement('div');
             container.classList.add('game-container');
             
-            const prizes = [
-                { text: '10 Kisses 💋', color: '#ff6b9d' },
-                { text: 'Movie Night 🎬', color: '#c06c84' },
-                { text: 'You Choose Date 🌹', color: '#f093fb' },
-                { text: 'Free Hug Pass 🤗', color: '#667eea' },
-                { text: 'Princess Treatment 👑', color: '#764ba2' }
+            const questions = [
+                {
+                    question: "What do we say when we say something same?",
+                    word: "МИНДАЛЬ",
+                    hint: "Our special word 😊"
+                },
+                {
+                    question: "What is my favourite word to call you?",
+                    word: "ЖАНМ",
+                    hint: "You know this one, Inna 💕"
+                },
+                {
+                    question: "I ____ U",
+                    word: "LOVE",
+                    hint: "Fill in the blank ❤️"
+                }
             ];
             
-            let isSpinning = false;
-            let currentRotation = 0;
+            let currentQuestionIndex = 0;
+            let selectedLetters = [];
             
             container.innerHTML = `
-                <div class="game-title">💖 Spin the Love Wheel! 💖</div>
-                <div class="wheel-container">
-                    <div class="wheel-pointer"></div>
-                    <div class="wheel" id="loveWheel"></div>
-                </div>
-                <div class="wheel-result" id="wheelResult"></div>
-                <button class="spin-btn" id="spinBtn">SPIN! 🎯</button>
-                <button class="close-game-btn" style="margin-top: 20px;" onclick="this.parentElement.parentElement.remove()">Close</button>
+                <div class="game-title" id="wordGameTitle">💌 Build the Word! 💌</div>
+                <div class="game-score" style="min-height: 80px; font-size: 18px; line-height: 1.6; margin-bottom: 20px;" id="questionText"></div>
+                <div class="game-score" style="min-height: 50px; font-size: 24px; font-weight: 700; color: #feca57;" id="currentWord"></div>
+                <div class="game-area" id="letterGameArea" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px; padding: 30px 15px;"></div>
+                <button class="close-game-btn" onclick="this.parentElement.parentElement.remove()">Close</button>
             `;
             
             overlay.appendChild(container);
             document.body.appendChild(overlay);
             
-            const wheel = document.getElementById('loveWheel');
-            const spinBtn = document.getElementById('spinBtn');
-            const resultDiv = document.getElementById('wheelResult');
+            const gameArea = document.getElementById('letterGameArea');
+            const questionText = document.getElementById('questionText');
+            const currentWordDisplay = document.getElementById('currentWord');
+            const gameTitle = document.getElementById('wordGameTitle');
             
-            // Create wheel slices
-            const sliceAngle = 360 / prizes.length;
-            prizes.forEach((prize, index) => {
-                const slice = document.createElement('div');
-                slice.classList.add('wheel-slice');
-                slice.textContent = prize.text;
-                slice.style.background = prize.color;
-                slice.style.transform = `rotate(${index * sliceAngle}deg) skewY(${90 - sliceAngle}deg)`;
-                wheel.appendChild(slice);
-            });
+            function loadQuestion() {
+                if (currentQuestionIndex >= questions.length) {
+                    // Game complete!
+                    gameTitle.textContent = '💖 You did it, Zhanm! 💖';
+                    questionText.innerHTML = '';
+                    currentWordDisplay.innerHTML = '';
+                    gameArea.innerHTML = `
+                        <div style="text-align: center; color: white; padding: 40px 20px;">
+                            <div style="font-size: 32px; margin-bottom: 20px; line-height: 1.5;">
+                                And I always will
+                            </div>
+                            <div style="font-size: 48px; animation: pulse 1.5s ease-in-out infinite;">
+                                💕 💖 💗 💞 💓
+                            </div>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                const current = questions[currentQuestionIndex];
+                selectedLetters = [];
+                
+                questionText.innerHTML = `
+                    <div style="font-size: 20px; margin-bottom: 10px;">${current.question}</div>
+                    <div style="font-size: 14px; color: rgba(255,255,255,0.8);">${current.hint}</div>
+                `;
+                currentWordDisplay.textContent = '';
+                
+                // Shuffle letters
+                const letters = current.word.split('');
+                const shuffled = [...letters].sort(() => Math.random() - 0.5);
+                
+                gameArea.innerHTML = '';
+                
+                shuffled.forEach((letter, index) => {
+                    const letterBtn = document.createElement('button');
+                    letterBtn.textContent = letter;
+                    letterBtn.style.cssText = `
+                        background: linear-gradient(135deg, #ff6b9d, #c06c84);
+                        color: white;
+                        border: none;
+                        padding: 20px;
+                        border-radius: 15px;
+                        font-size: 28px;
+                        font-weight: 700;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+                        min-width: 60px;
+                        min-height: 60px;
+                        animation: fadeIn 0.5s ease-out ${index * 0.1}s backwards;
+                    `;
+                    
+                    letterBtn.addEventListener('click', () => {
+                        if (letterBtn.disabled) return;
+                        
+                        selectedLetters.push(letter);
+                        letterBtn.disabled = true;
+                        letterBtn.style.opacity = '0.3';
+                        letterBtn.style.transform = 'scale(0.8)';
+                        
+                        currentWordDisplay.textContent = selectedLetters.join('');
+                        
+                        // Check if complete
+                        if (selectedLetters.length === letters.length) {
+                            const isCorrect = selectedLetters.join('') === current.word;
+                            
+                            if (isCorrect) {
+                                // Correct!
+                                currentWordDisplay.style.color = '#4ade80';
+                                
+                                setTimeout(() => {
+                                    currentQuestionIndex++;
+                                    loadQuestion();
+                                }, 1500);
+                            } else {
+                                // Wrong!
+                                currentWordDisplay.style.color = '#ff6b9d';
+                                questionText.innerHTML = `
+                                    <div style="color: #ff6b9d; font-size: 18px;">
+                                        Not quite, Inna! Try again 😊
+                                    </div>
+                                `;
+                                
+                                setTimeout(() => {
+                                    selectedLetters = [];
+                                    currentWordDisplay.textContent = '';
+                                    currentWordDisplay.style.color = '#feca57';
+                                    questionText.innerHTML = `
+                                        <div style="font-size: 20px; margin-bottom: 10px;">${current.question}</div>
+                                        <div style="font-size: 14px; color: rgba(255,255,255,0.8);">${current.hint}</div>
+                                    `;
+                                    
+                                    gameArea.querySelectorAll('button').forEach(btn => {
+                                        btn.disabled = false;
+                                        btn.style.opacity = '1';
+                                        btn.style.transform = 'scale(1)';
+                                    });
+                                }, 1500);
+                            }
+                        }
+                    });
+                    
+                    gameArea.appendChild(letterBtn);
+                });
+            }
             
-            spinBtn.addEventListener('click', () => {
-                if (isSpinning) return;
-                
-                isSpinning = true;
-                spinBtn.disabled = true;
-                resultDiv.textContent = '';
-                
-                // Random spins
-                const spins = 5 + Math.random() * 3;
-                const randomDegree = Math.random() * 360;
-                const totalRotation = spins * 360 + randomDegree;
-                
-                currentRotation += totalRotation;
-                wheel.style.transform = `rotate(${currentRotation}deg)`;
-                
-                setTimeout(() => {
-                    const finalAngle = currentRotation % 360;
-                    const prizeIndex = Math.floor((360 - finalAngle) / sliceAngle) % prizes.length;
-                    const wonPrize = prizes[prizeIndex];
-                    
-                    resultDiv.textContent = `You won: ${wonPrize.text}`;
-                    resultDiv.style.color = wonPrize.color;
-                    
-                    isSpinning = false;
-                    spinBtn.disabled = false;
-                }, 4000);
-            });
+            loadQuestion();
         }
 
         // Initialize
         createFloatingHearts();
         createPhotoSparkles();
         
-        // Add click handlers to photos
-        document.querySelector('.photo-1').addEventListener('click', (e) => {
+        // Easter Egg: Click progress hearts 3 times to play video
+        const progressHeartsContainer = document.getElementById('progressHearts');
+        progressHeartsContainer.style.cursor = 'pointer';
+        progressHeartsContainer.addEventListener('click', () => {
+            if (easterEggTriggered) return;
+            
+            heartClickCount++;
+            
+            // Add bounce animation on click
+            progressHeartsContainer.style.animation = 'bounce 0.5s ease';
+            setTimeout(() => {
+                progressHeartsContainer.style.animation = '';
+            }, 500);
+            
+            if (heartClickCount >= 3) {
+                easterEggTriggered = true;
+                heartClickCount = 0;
+                
+                // Play the video!
+                playVideo().then(() => {
+                    // Show a message after video
+                    const easterEggMsg = document.createElement('div');
+                    easterEggMsg.style.cssText = `
+                        position: fixed;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        background: rgba(255, 107, 157, 0.95);
+                        color: white;
+                        padding: 30px 40px;
+                        border-radius: 20px;
+                        font-size: 24px;
+                        font-weight: 600;
+                        z-index: 100000;
+                        text-align: center;
+                        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+                        animation: fadeIn 0.5s ease-out;
+                    `;
+                    easterEggMsg.innerHTML = '🎉 You found the secret video, Inna! 💕';
+                    document.body.appendChild(easterEggMsg);
+                    
+                    setTimeout(() => {
+                        easterEggMsg.style.animation = 'fadeOut 0.5s ease-out forwards';
+                        setTimeout(() => {
+                            easterEggMsg.remove();
+                            easterEggTriggered = false;
+                        }, 500);
+                    }, 3000);
+                });
+            }
+        });
+        
+        // Add click and touch handlers to photos for mobile compatibility
+        const photo1 = document.querySelector('.photo-1');
+        const photo2 = document.querySelector('.photo-2');
+        
+        // Photo 1 - Catch Hearts Game
+        photo1.addEventListener('click', (e) => {
             e.stopPropagation();
+            e.preventDefault();
             startCatchHeartsGame();
         });
         
-        document.querySelector('.photo-2').addEventListener('click', (e) => {
+        photo1.addEventListener('touchend', (e) => {
             e.stopPropagation();
+            e.preventDefault();
+            startCatchHeartsGame();
+        });
+        
+        // Photo 2 - Spin Wheel Game
+        photo2.addEventListener('click', (e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            startSpinWheelGame();
+        });
+        
+        photo2.addEventListener('touchend', (e) => {
+            e.stopPropagation();
+            e.preventDefault();
             startSpinWheelGame();
         });
 
