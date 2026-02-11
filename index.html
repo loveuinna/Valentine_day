@@ -399,17 +399,30 @@
             background: white;
             color: #764ba2;
             border: none;
-            padding: 12px 30px;
+            padding: 15px 40px;
             border-radius: 25px;
             font-size: 18px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
+            margin-top: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            display: block;
+            width: auto;
+            min-width: 120px;
         }
 
         .close-game-btn:hover {
             transform: scale(1.05);
             box-shadow: 0 5px 20px rgba(255, 255, 255, 0.3);
+        }
+
+        @media (max-width: 480px) {
+            .close-game-btn {
+                padding: 12px 35px;
+                font-size: 16px;
+                margin-top: 20px;
+            }
         }
 
         /* Celebration hearts */
@@ -444,7 +457,7 @@
 
         .photo-1:hover {
             transform: rotate(8deg) scale(1.1);
-            z-index: 101;
+            z-index: 6;
         }
 
         .photo-2 {
@@ -456,7 +469,7 @@
 
         .photo-2:hover {
             transform: translateY(-50%) rotate(-6deg) scale(1.1);
-            z-index: 101;
+            z-index: 6;
         }
 
         .photo-frame img {
@@ -523,7 +536,7 @@
                         0 0 20px rgba(255, 107, 157, 0.3);
             border: 8px solid rgba(255, 255, 255, 0.9);
             transition: transform 0.3s ease;
-            z-index: 100;
+            z-index: 5;
             animation: fadeIn 1s ease-out, photoGlow 3s ease-in-out infinite;
             cursor: pointer;
             touch-action: manipulation;
@@ -677,7 +690,7 @@
 
     <!-- Progress Bar -->
     <div class="progress-container">
-        <div class="progress-text" id="progressText">Love Quest Progress: 0%</div>
+        <div class="progress-text" id="progressText">Махаббат квесті: 0%</div>
         <div class="progress-bar-bg">
             <div class="progress-bar-fill" id="progressBar"></div>
         </div>
@@ -702,10 +715,10 @@
 
     <!-- Main content -->
     <div class="content" id="mainContent">
-        <div class="question" id="question">Will you make me the luckiest guy alive this Valentine's? 💖</div>
+        <div class="question" id="question">Мені осы Қозы көрпеш және Баян сұлу күнінде ең бақытты жігіт етесің бе, Жанм? 💖</div>
         <div class="button-container" id="buttonContainer">
-            <button id="yesBtn">Yes 💕</button>
-            <button id="noBtn">No 😈</button>
+            <button id="yesBtn">Иә 💕</button>
+            <button id="noBtn">Жоқ 😈</button>
         </div>
     </div>
 
@@ -717,10 +730,10 @@
     <script>
         // Questions array
         const questions = [
-            "Will you make me the luckiest guy alive this Valentine's, Zhanm? 💖",
-            "Can I proudly say that you're mine, Inna? 😏💘",
-            "So… are we officially that cute couple now? 😌💕",
-            "Are we about to have the most romantic summer ever, Zhanm? ☀️💞"
+            "Мені осы Қозы көрпеш және Баян сұлу күнінде ең бақытты жігіт етесің бе, Жанм? 💖",
+            "Сен менікісің деп мақтана айта аламын ба, Жанм? 😏💘",
+            "Біз ресми түрде ең сүйкімді жұп болдық па? 😌💕",
+            "Бізді ең романтикалық жаз күтіп тұр ма, Жанм? ☀️💞"
         ];
 
         let currentQuestion = 0;
@@ -731,16 +744,16 @@
         let easterEggTriggered = false;
         
         const noButtonTexts = [
-            "No 😈",
-            "Are you sure? 😢",
-            "Think again 👀",
-            "Wrong answer 😌",
-            "Nice try 😭",
-            "You can't escape 😏",
-            "Really? 🥺",
-            "Come on... 💔",
-            "Please? 🙏",
-            "Last chance! 😤"
+            "Жоқ 😈",
+            "Сенімдісің бе? 😢",
+            "Қайта ойла 👀",
+            "Қате жауап 😌",
+            "Жақсы әрекет 😭",
+            "Қашып кете алмайсың 😏",
+            "Шынымен бе? 🥺",
+            "Қане... 💔",
+            "Өтінемін? 🙏",
+            "Соңғы мүмкіндік! 😤"
         ];
 
         // Elements
@@ -864,8 +877,8 @@
                 `;
                 errorPopup.innerHTML = `
                     <div style="font-size: 48px; margin-bottom: 15px;">⚠️</div>
-                    <div>Error 404:</div>
-                    <div>"No" option not available 😌</div>
+                    <div>Қате 404:</div>
+                    <div>"Жоқ" опциясы қолжетімсіз 😌</div>
                 `;
                 document.body.appendChild(errorPopup);
                 
@@ -897,7 +910,7 @@
             // Add "Why?" message at random position
             const whyMsg = document.createElement('div');
             whyMsg.classList.add('why-message');
-            whyMsg.textContent = 'Why? 😢';
+            whyMsg.textContent = 'Неге? 😢';
             whyMsg.style.fontSize = (Math.random() * 20 + 20) + 'px';
             whyMsg.style.left = (Math.random() * 80 + 10) + '%';
             whyMsg.style.top = (Math.random() * 80 + 10) + '%';
@@ -957,7 +970,7 @@
             // Update progress bar
             const progress = ((currentQuestion + 1) / questions.length) * 100;
             document.getElementById('progressBar').style.width = progress + '%';
-            document.getElementById('progressText').textContent = `Love Quest Progress: ${Math.round(progress)}%`;
+            document.getElementById('progressText').textContent = `Махаббат квесті: ${Math.round(progress)}%`;
             
             // Update progress hearts
             const progressHearts = document.querySelectorAll('.progress-heart');
@@ -997,7 +1010,7 @@
                     noBtn.style.left = '';
                     noBtn.style.top = '';
                     noBtn.style.position = 'relative';
-                    noBtn.textContent = 'No 😈';
+                    noBtn.textContent = 'Жоқ 😈';
                     noClickCount = 0;
                     
                     // Reset Yes button scale
@@ -1065,27 +1078,33 @@
             // Add final message
             const finalMessage = document.createElement('div');
             finalMessage.classList.add('final-message');
-            finalMessage.textContent = "It's official, Zhanm. You're stuck with me now. No refunds. 😌💖";
+            finalMessage.textContent = "Ресми, Жанм. Енді менен құтыла алмайсың. Қайтарым жоқ. 😌💖";
             document.getElementById('mainContent').appendChild(finalMessage);
 
-            // Add animated messages with better spacing so they don't overlap
+            // Add animated messages one by one with dark background boxes so they're readable
             const messages = [
-                { text: "I love you, Inna 💕", delay: 2000, duration: 4000, top: '15%', left: '10%' },
-                { text: "Waiting till summer ☀️💖", delay: 3000, duration: 4000, top: '25%', right: '10%' },
-                { text: "You're my everything, Zhanm 💞", delay: 4000, duration: 4000, top: '75%', left: '10%' },
-                { text: "Can't wait for our adventures 🌟", delay: 5000, duration: 4000, top: '85%', right: '10%' }
+                { text: "Мен сені жақсы көремін, Жанм 💕", delay: 2000, duration: 3000 },
+                { text: "Жазды күтеміз ☀️💖", delay: 3500, duration: 3000 },
+                { text: "Сен менің бәрімсің, Жанм 💞", delay: 5000, duration: 3000 },
+                { text: "Біздің шытырман оқиғаларды күтемін 🌟", delay: 6500, duration: 3000 }
             ];
 
-            messages.forEach(msg => {
+            let messageYPosition = 15;
+            messages.forEach((msg, index) => {
                 setTimeout(() => {
                     const messageDiv = document.createElement('div');
                     messageDiv.classList.add('animated-message');
                     messageDiv.textContent = msg.text;
-                    messageDiv.style.top = msg.top;
-                    if (msg.left) messageDiv.style.left = msg.left;
-                    if (msg.right) messageDiv.style.right = msg.right;
+                    messageDiv.style.top = messageYPosition + '%';
+                    messageDiv.style.left = '50%';
+                    messageDiv.style.transform = 'translateX(-50%)';
+                    messageDiv.style.background = 'rgba(0, 0, 0, 0.7)';
+                    messageDiv.style.padding = '15px 25px';
+                    messageDiv.style.borderRadius = '15px';
                     messageDiv.style.animation = `floatMessage ${msg.duration}ms ease-in-out`;
                     document.body.appendChild(messageDiv);
+                    
+                    messageYPosition += 20;
 
                     setTimeout(() => messageDiv.remove(), msg.duration);
                 }, msg.delay);
@@ -1129,7 +1148,7 @@
                 document.body.appendChild(blackScreen);
                 
                 // Typewriter effect
-                const finalText = "This wasn't just a website, Inna. I made this because you matter. Every line of code, every animation, every heart... all for you. 💖";
+                const finalText = "Бұл жай ғана сайт емес, Жанм. Мен мұны сен маңызды болғандықтан жасадым. Әрбір код жолы, әрбір анимация, әрбір жүрек... бәрі сен үшін. 💖";
                 let charIndex = 0;
                 
                 const typeInterval = setInterval(() => {
@@ -1198,10 +1217,10 @@
             let gameInterval;
             
             container.innerHTML = `
-                <div class="game-title">💕 Catch the Hearts! 💕</div>
-                <div class="game-score">Score: <span id="catchScore">0</span> / 10</div>
+                <div class="game-title">💕 Жүректерді ұстау! 💕</div>
+                <div class="game-score">Ұпай: <span id="catchScore">0</span> / 10</div>
                 <div class="game-area" id="catchGameArea"></div>
-                <button class="close-game-btn" onclick="this.parentElement.parentElement.remove()">Close</button>
+                <button class="close-game-btn" onclick="this.parentElement.parentElement.remove()">Жабу</button>
             `;
             
             overlay.appendChild(container);
@@ -1215,7 +1234,7 @@
             gameInterval = setInterval(() => {
                 if (score >= 10) {
                     clearInterval(gameInterval);
-                    gameArea.innerHTML = '<div style="color: white; font-size: 24px; padding: 50px; line-height: 1.6;">You caught my heart, Inna.<br>Now you\'re stuck with me 💘</div>';
+                    gameArea.innerHTML = '<div style="color: white; font-size: 24px; padding: 50px; line-height: 1.6;">Сен менің жүрегімді ұстадың, Жанм.<br>Енді менен құтыла алмайсың 💘</div>';
                     return;
                 }
                 
@@ -1237,7 +1256,7 @@
                         gameArea.innerHTML = `
                             <div style="text-align: center; padding: 20px;">
                                 <div style="color: white; font-size: 28px; font-weight: 700; margin-bottom: 20px;">
-                                    🎉 You found Anton! 🐱
+                                    🎉 Сен Антонды таптың! 🐱
                                 </div>
                                 <img src="cat.jpg" style="max-width: 100%; max-height: 250px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);" alt="Anton the cat">
                             </div>
@@ -1312,14 +1331,14 @@
             
             const questions = [
                 {
-                    question: "What do we say when we say something same?",
+                    question: "Бірдей нәрсе айтқанда не айтамыз?",
                     word: "МИНДАЛЬ",
-                    hint: "Our special word 😊"
+                    hint: "Біздің арнайы сөзіміз 😊"
                 },
                 {
-                    question: "What is my favourite word to call you?",
+                    question: "Мен сені атайтын сүйікті сөзім?",
                     word: "ЖАНМ",
-                    hint: "You know this one, Inna 💕"
+                    hint: "Сен мұны білесің, Жанм 💕"
                 },
                 {
                     question: "I ____ U",
@@ -1332,11 +1351,11 @@
             let selectedLetters = [];
             
             container.innerHTML = `
-                <div class="game-title" id="wordGameTitle">💌 Build the Word! 💌</div>
+                <div class="game-title" id="wordGameTitle">💌 Сөзді құр! 💌</div>
                 <div class="game-score" style="min-height: 80px; font-size: 18px; line-height: 1.6; margin-bottom: 20px;" id="questionText"></div>
                 <div class="game-score" style="min-height: 50px; font-size: 24px; font-weight: 700; color: #feca57;" id="currentWord"></div>
                 <div class="game-area" id="letterGameArea" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px; padding: 30px 15px;"></div>
-                <button class="close-game-btn" onclick="this.parentElement.parentElement.remove()">Close</button>
+                <button class="close-game-btn" onclick="this.parentElement.parentElement.remove()">Жабу</button>
             `;
             
             overlay.appendChild(container);
@@ -1350,7 +1369,7 @@
             function loadQuestion() {
                 if (currentQuestionIndex >= questions.length) {
                     // Game complete!
-                    gameTitle.textContent = '💖 You did it, Zhanm! 💖';
+                    gameTitle.textContent = '💖';
                     questionText.innerHTML = '';
                     currentWordDisplay.innerHTML = '';
                     gameArea.innerHTML = `
@@ -1427,7 +1446,7 @@
                                 currentWordDisplay.style.color = '#ff6b9d';
                                 questionText.innerHTML = `
                                     <div style="color: #ff6b9d; font-size: 18px;">
-                                        Not quite, Inna! Try again 😊
+                                        Дұрыс емес, Жанм! Қайталап көр 😊
                                     </div>
                                 `;
                                 
@@ -1499,7 +1518,7 @@
                         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
                         animation: fadeIn 0.5s ease-out;
                     `;
-                    easterEggMsg.innerHTML = '🎉 You found the secret video, Inna! 💕';
+                    easterEggMsg.innerHTML = '🎉 Сен жасырын видеоны таптың, Жанм! 💕';
                     document.body.appendChild(easterEggMsg);
                     
                     setTimeout(() => {
