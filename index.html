@@ -442,26 +442,26 @@
         }
 
         .photo-1 {
-            top: 60px;
-            right: 40px;
-            transform: rotate(8deg);
+            top: 8%;
+            left: 50%;
+            transform: translateX(-50%) rotate(8deg);
             cursor: pointer;
         }
 
         .photo-1:hover {
-            transform: rotate(8deg) scale(1.1);
+            transform: translateX(-50%) rotate(8deg) scale(1.1);
             z-index: 101;
         }
 
         .photo-2 {
-            top: 82%;
-            left: 40px;
-            transform: translateY(-50%) rotate(-6deg);
+            bottom: 6%;
+            left: 50%;
+            transform: translateX(-50%) rotate(-6deg);
             cursor: pointer;
         }
 
         .photo-2:hover {
-            transform: translateY(-50%) rotate(-6deg) scale(1.1);
+            transform: translateX(-50%) rotate(-6deg) scale(1.1);
             z-index: 101;
         }
 
@@ -646,13 +646,15 @@
             }
 
             .photo-1 {
-                top: 40px;
-                right: 15px;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%) rotate(8deg);
             }
 
             .photo-2 {
-                top: 82%;
-                left: 15px;
+                bottom: 15px;
+                left: 50%;
+                transform: translateX(-50%) rotate(-6deg);
             }
 
             .video-container video {
@@ -667,12 +669,15 @@
             }
 
             .photo-1 {
-                top: 50px;
-                right: 25px;
+                top: 30px;
+                left: 50%;
+                transform: translateX(-50%) rotate(8deg);
             }
 
             .photo-2 {
-                left: 25px;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%) rotate(-6deg);
             }
         }
     </style>
