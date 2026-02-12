@@ -121,7 +121,7 @@
             padding: 20px;
             max-width: 600px;
             width: 90%;
-            margin-top: 80px;
+            margin-top: 40px;
         }
 
         .question {
@@ -304,7 +304,7 @@
             text-shadow: 0 0 15px rgba(255, 107, 157, 0.8),
                          0 4px 20px rgba(0, 0, 0, 0.5);
             opacity: 0;
-            z-index: 100;
+            z-index: 2000;
         }
 
         @keyframes floatMessage {
@@ -442,26 +442,27 @@
         }
 
         .photo-1 {
-            top: 8%;
-            left: 50%;
-            transform: translateX(-50%) rotate(8deg);
+            top: 65%;
+            left: 8%;
+            transform: rotate(8deg);
             cursor: pointer;
         }
 
         .photo-1:hover {
-            transform: translateX(-50%) rotate(8deg) scale(1.1);
+            transform: rotate(8deg) scale(1.1);
             z-index: 101;
         }
 
         .photo-2 {
-            bottom: 6%;
-            left: 50%;
-            transform: translateX(-50%) rotate(-6deg);
+            top: 18%;
+            right: 8%;
+            left: auto;
+            transform: rotate(-6deg);
             cursor: pointer;
         }
 
         .photo-2:hover {
-            transform: translateX(-50%) rotate(-6deg) scale(1.1);
+            transform: rotate(-6deg) scale(1.1);
             z-index: 101;
         }
 
@@ -646,15 +647,16 @@
             }
 
             .photo-1 {
-                top: 20px;
-                left: 50%;
-                transform: translateX(-50%) rotate(8deg);
+                top: 70%;
+                left: 6%;
+                transform: rotate(8deg);
             }
 
             .photo-2 {
-                bottom: 15px;
-                left: 50%;
-                transform: translateX(-50%) rotate(-6deg);
+                top: 16%;
+                right: 6%;
+                left: auto;
+                transform: rotate(-6deg);
             }
 
             .video-container video {
@@ -669,15 +671,16 @@
             }
 
             .photo-1 {
-                top: 30px;
-                left: 50%;
-                transform: translateX(-50%) rotate(8deg);
+                top: 68%;
+                left: 6%;
+                transform: rotate(8deg);
             }
 
             .photo-2 {
-                bottom: 20px;
-                left: 50%;
-                transform: translateX(-50%) rotate(-6deg);
+                top: 18%;
+                right: 6%;
+                left: auto;
+                transform: rotate(-6deg);
             }
         }
     </style>
@@ -1029,6 +1032,11 @@
 
         // Final celebration screen
         function showFinalCelebration() {
+            // Hide progress bar and photos so final texts are clear
+            const progress = document.querySelector('.progress-container');
+            if (progress) progress.style.display = 'none';
+            document.querySelectorAll('.photo-frame').forEach(p => p.style.display = 'none');
+
             // Clear content
             document.getElementById('mainContent').innerHTML = '';
 
