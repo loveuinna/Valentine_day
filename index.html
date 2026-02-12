@@ -351,67 +351,36 @@
         .game-container {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 20px;
-            padding: 20px;
+            padding: 30px;
             box-shadow: 0 20px 60px rgba(255, 107, 157, 0.5);
             text-align: center;
-            max-width: 95%;
-            width: 450px;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        @media (max-width: 480px) {
-            .game-container {
-                padding: 15px;
-                width: 90%;
-                max-height: 85vh;
-            }
+            max-width: 90%;
+            width: 500px;
         }
 
         .game-title {
             color: white;
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        @media (max-width: 480px) {
-            .game-title {
-                font-size: 24px;
-                margin-bottom: 10px;
-            }
         }
 
         .game-score {
             color: white;
-            font-size: 20px;
-            margin-bottom: 15px;
+            font-size: 24px;
+            margin-bottom: 20px;
             font-weight: 600;
-        }
-
-        @media (max-width: 480px) {
-            .game-score {
-                font-size: 18px;
-                margin-bottom: 10px;
-            }
         }
 
         .game-area {
             position: relative;
             width: 100%;
-            height: 350px;
+            height: 400px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 15px;
             overflow: hidden;
-            margin-bottom: 15px;
-        }
-
-        @media (max-width: 480px) {
-            .game-area {
-                height: 280px;
-                margin-bottom: 10px;
-            }
+            margin-bottom: 20px;
         }
 
         .falling-heart {
@@ -430,30 +399,17 @@
             background: white;
             color: #764ba2;
             border: none;
-            padding: 15px 40px;
+            padding: 12px 30px;
             border-radius: 25px;
             font-size: 18px;
-            font-weight: 700;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-top: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            display: block;
-            width: auto;
-            min-width: 120px;
         }
 
         .close-game-btn:hover {
             transform: scale(1.05);
             box-shadow: 0 5px 20px rgba(255, 255, 255, 0.3);
-        }
-
-        @media (max-width: 480px) {
-            .close-game-btn {
-                padding: 12px 35px;
-                font-size: 16px;
-                margin-top: 20px;
-            }
         }
 
         /* Celebration hearts */
@@ -488,7 +444,7 @@
 
         .photo-1:hover {
             transform: rotate(8deg) scale(1.1);
-            z-index: 6;
+            z-index: 101;
         }
 
         .photo-2 {
@@ -500,7 +456,7 @@
 
         .photo-2:hover {
             transform: translateY(-50%) rotate(-6deg) scale(1.1);
-            z-index: 6;
+            z-index: 101;
         }
 
         .photo-frame img {
@@ -567,12 +523,11 @@
                         0 0 20px rgba(255, 107, 157, 0.3);
             border: 8px solid rgba(255, 255, 255, 0.9);
             transition: transform 0.3s ease;
-            z-index: 5;
+            z-index: 100;
             animation: fadeIn 1s ease-out, photoGlow 3s ease-in-out infinite;
             cursor: pointer;
             touch-action: manipulation;
             -webkit-tap-highlight-color: transparent;
-            pointer-events: auto;
         }
 
         @keyframes photoGlow {
@@ -679,18 +634,19 @@
             }
 
             .photo-frame {
-                width: 110px;
-                height: 135px;
+                width: 100px;
+                height: 120px;
                 border: 5px solid rgba(255, 255, 255, 0.9);
             }
 
             .photo-1 {
-                top: 50px;
-                right: 25px;
+                top: 40px;
+                right: 15px;
             }
 
             .photo-2 {
-                left: 25px;
+                top: 45%;
+                left: 15px;
             }
 
             .video-container video {
@@ -721,7 +677,7 @@
 
     <!-- Progress Bar -->
     <div class="progress-container">
-        <div class="progress-text" id="progressText">Махаббат квесті: 0%</div>
+        <div class="progress-text" id="progressText">Love Quest Progress: 0%</div>
         <div class="progress-bar-bg">
             <div class="progress-bar-fill" id="progressBar"></div>
         </div>
@@ -746,10 +702,10 @@
 
     <!-- Main content -->
     <div class="content" id="mainContent">
-        <div class="question" id="question">Мені осы Қозы көрпеш және Баян сұлу күнінде ең бақытты жігіт етесің бе, Жанм? 💖</div>
+        <div class="question" id="question">Will you make me the luckiest guy alive this Valentine's? 💖</div>
         <div class="button-container" id="buttonContainer">
-            <button id="yesBtn">Иә 💕</button>
-            <button id="noBtn">Жоқ 😈</button>
+            <button id="yesBtn">Yes 💕</button>
+            <button id="noBtn">No 😈</button>
         </div>
     </div>
 
@@ -761,10 +717,10 @@
     <script>
         // Questions array
         const questions = [
-            "Мені осы Қозы көрпеш және Баян сұлу күнінде ең бақытты жігіт етесің бе, Жанм? 💖",
-            "Сен менікісің деп мақтана айта аламын ба, Жанм? 😏💘",
-            "Біз ресми түрде ең сүйкімді жұп болдық па? 😌💕",
-            "Бізді ең романтикалық жаз күтіп тұр ма, Жанм? ☀️💞"
+            "Will you make me the luckiest guy alive this Valentine's, Zhanm? 💖",
+            "Can I proudly say that you're mine, Inna? 😏💘",
+            "So… are we officially that cute couple now? 😌💕",
+            "Are we about to have the most romantic summer ever, Zhanm? ☀️💞"
         ];
 
         let currentQuestion = 0;
@@ -775,16 +731,16 @@
         let easterEggTriggered = false;
         
         const noButtonTexts = [
-            "Жоқ 😈",
-            "Сенімдісің бе? 😢",
-            "Қайта ойла 👀",
-            "Қате жауап 😌",
-            "Жақсы әрекет 😭",
-            "Қашып кете алмайсың 😏",
-            "Шынымен бе? 🥺",
-            "Қане... 💔",
-            "Өтінемін? 🙏",
-            "Соңғы мүмкіндік! 😤"
+            "No 😈",
+            "Are you sure? 😢",
+            "Think again 👀",
+            "Wrong answer 😌",
+            "Nice try 😭",
+            "You can't escape 😏",
+            "Really? 🥺",
+            "Come on... 💔",
+            "Please? 🙏",
+            "Last chance! 😤"
         ];
 
         // Elements
@@ -908,8 +864,8 @@
                 `;
                 errorPopup.innerHTML = `
                     <div style="font-size: 48px; margin-bottom: 15px;">⚠️</div>
-                    <div>Қате 404:</div>
-                    <div>"Жоқ" опциясы қолжетімсіз 😌</div>
+                    <div>Error 404:</div>
+                    <div>"No" option not available 😌</div>
                 `;
                 document.body.appendChild(errorPopup);
                 
@@ -941,7 +897,7 @@
             // Add "Why?" message at random position
             const whyMsg = document.createElement('div');
             whyMsg.classList.add('why-message');
-            whyMsg.textContent = 'Неге? 😢';
+            whyMsg.textContent = 'Why? 😢';
             whyMsg.style.fontSize = (Math.random() * 20 + 20) + 'px';
             whyMsg.style.left = (Math.random() * 80 + 10) + '%';
             whyMsg.style.top = (Math.random() * 80 + 10) + '%';
@@ -1001,7 +957,7 @@
             // Update progress bar
             const progress = ((currentQuestion + 1) / questions.length) * 100;
             document.getElementById('progressBar').style.width = progress + '%';
-            document.getElementById('progressText').textContent = `Махаббат квесті: ${Math.round(progress)}%`;
+            document.getElementById('progressText').textContent = `Love Quest Progress: ${Math.round(progress)}%`;
             
             // Update progress hearts
             const progressHearts = document.querySelectorAll('.progress-heart');
@@ -1041,7 +997,7 @@
                     noBtn.style.left = '';
                     noBtn.style.top = '';
                     noBtn.style.position = 'relative';
-                    noBtn.textContent = 'Жоқ 😈';
+                    noBtn.textContent = 'No 😈';
                     noClickCount = 0;
                     
                     // Reset Yes button scale
@@ -1109,33 +1065,27 @@
             // Add final message
             const finalMessage = document.createElement('div');
             finalMessage.classList.add('final-message');
-            finalMessage.textContent = "Ресми, Жанм. Енді менен құтыла алмайсың. Қайтарым жоқ. 😌💖";
+            finalMessage.textContent = "It's official, Zhanm. You're stuck with me now. No refunds. 😌💖";
             document.getElementById('mainContent').appendChild(finalMessage);
 
-            // Add animated messages one by one with dark background boxes so they're readable
+            // Add animated messages with better spacing so they don't overlap
             const messages = [
-                { text: "Мен сені жақсы көремін, Жанм 💕", delay: 2000, duration: 3000 },
-                { text: "Жазды күтеміз ☀️💖", delay: 3500, duration: 3000 },
-                { text: "Сен менің бәрімсің, Жанм 💞", delay: 5000, duration: 3000 },
-                { text: "Біздің шытырман оқиғаларды күтемін 🌟", delay: 6500, duration: 3000 }
+                { text: "I love you, Inna 💕", delay: 2000, duration: 4000, top: '15%', left: '10%' },
+                { text: "Waiting till summer ☀️💖", delay: 3000, duration: 4000, top: '25%', right: '10%' },
+                { text: "You're my everything, Zhanm 💞", delay: 4000, duration: 4000, top: '75%', left: '10%' },
+                { text: "Can't wait for our adventures 🌟", delay: 5000, duration: 4000, top: '85%', right: '10%' }
             ];
 
-            let messageYPosition = 15;
-            messages.forEach((msg, index) => {
+            messages.forEach(msg => {
                 setTimeout(() => {
                     const messageDiv = document.createElement('div');
                     messageDiv.classList.add('animated-message');
                     messageDiv.textContent = msg.text;
-                    messageDiv.style.top = messageYPosition + '%';
-                    messageDiv.style.left = '50%';
-                    messageDiv.style.transform = 'translateX(-50%)';
-                    messageDiv.style.background = 'rgba(0, 0, 0, 0.7)';
-                    messageDiv.style.padding = '15px 25px';
-                    messageDiv.style.borderRadius = '15px';
+                    messageDiv.style.top = msg.top;
+                    if (msg.left) messageDiv.style.left = msg.left;
+                    if (msg.right) messageDiv.style.right = msg.right;
                     messageDiv.style.animation = `floatMessage ${msg.duration}ms ease-in-out`;
                     document.body.appendChild(messageDiv);
-                    
-                    messageYPosition += 20;
 
                     setTimeout(() => messageDiv.remove(), msg.duration);
                 }, msg.delay);
@@ -1179,7 +1129,7 @@
                 document.body.appendChild(blackScreen);
                 
                 // Typewriter effect
-                const finalText = "Бұл жай ғана сайт емес, Жанм. Мен мұны сен маңызды болғандықтан жасадым. Әрбір код жолы, әрбір анимация, әрбір жүрек... бәрі сен үшін. 💖";
+                const finalText = "This wasn't just a website, Inna. I made this because you matter. Every line of code, every animation, every heart... all for you. 💖";
                 let charIndex = 0;
                 
                 const typeInterval = setInterval(() => {
@@ -1248,10 +1198,10 @@
             let gameInterval;
             
             container.innerHTML = `
-                <div class="game-title">💕 Жүректерді ұстау! 💕</div>
-                <div class="game-score">Ұпай: <span id="catchScore">0</span> / 10</div>
+                <div class="game-title">💕 Catch the Hearts! 💕</div>
+                <div class="game-score">Score: <span id="catchScore">0</span> / 10</div>
                 <div class="game-area" id="catchGameArea"></div>
-                <button class="close-game-btn" onclick="this.parentElement.parentElement.remove()">Жабу</button>
+                <button class="close-game-btn" onclick="this.parentElement.parentElement.remove()">Close</button>
             `;
             
             overlay.appendChild(container);
@@ -1265,7 +1215,7 @@
             gameInterval = setInterval(() => {
                 if (score >= 10) {
                     clearInterval(gameInterval);
-                    gameArea.innerHTML = '<div style="color: white; font-size: 24px; padding: 50px; line-height: 1.6;">Сен менің жүрегімді ұстадың, Жанм.<br>Енді менен құтыла алмайсың 💘</div>';
+                    gameArea.innerHTML = '<div style="color: white; font-size: 24px; padding: 50px; line-height: 1.6;">You caught my heart, Inna.<br>Now you\'re stuck with me 💘</div>';
                     return;
                 }
                 
@@ -1287,7 +1237,7 @@
                         gameArea.innerHTML = `
                             <div style="text-align: center; padding: 20px;">
                                 <div style="color: white; font-size: 28px; font-weight: 700; margin-bottom: 20px;">
-                                    🎉 Сен Антонды таптың! 🐱
+                                    🎉 You found Anton! 🐱
                                 </div>
                                 <img src="cat.jpg" style="max-width: 100%; max-height: 250px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);" alt="Anton the cat">
                             </div>
@@ -1362,14 +1312,14 @@
             
             const questions = [
                 {
-                    question: "Бірдей нәрсе айтқанда не айтамыз?",
+                    question: "What do we say when we say something same?",
                     word: "МИНДАЛЬ",
-                    hint: "Біздің арнайы сөзіміз 😊"
+                    hint: "Our special word 😊"
                 },
                 {
-                    question: "Мен сені атайтын сүйікті сөзім?",
+                    question: "What is my favourite word to call you?",
                     word: "ЖАНМ",
-                    hint: "Сен мұны білесің, Жанм 💕"
+                    hint: "You know this one, Inna 💕"
                 },
                 {
                     question: "I ____ U",
@@ -1382,11 +1332,11 @@
             let selectedLetters = [];
             
             container.innerHTML = `
-                <div class="game-title" id="wordGameTitle">💌 Сөзді құр! 💌</div>
+                <div class="game-title" id="wordGameTitle">💌 Build the Word! 💌</div>
                 <div class="game-score" style="min-height: 80px; font-size: 18px; line-height: 1.6; margin-bottom: 20px;" id="questionText"></div>
                 <div class="game-score" style="min-height: 50px; font-size: 24px; font-weight: 700; color: #feca57;" id="currentWord"></div>
                 <div class="game-area" id="letterGameArea" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px; padding: 30px 15px;"></div>
-                <button class="close-game-btn" onclick="this.parentElement.parentElement.remove()">Жабу</button>
+                <button class="close-game-btn" onclick="this.parentElement.parentElement.remove()">Close</button>
             `;
             
             overlay.appendChild(container);
@@ -1400,7 +1350,7 @@
             function loadQuestion() {
                 if (currentQuestionIndex >= questions.length) {
                     // Game complete!
-                    gameTitle.textContent = '💖';
+                    gameTitle.textContent = '💖 You did it, Zhanm! 💖';
                     questionText.innerHTML = '';
                     currentWordDisplay.innerHTML = '';
                     gameArea.innerHTML = `
@@ -1477,7 +1427,7 @@
                                 currentWordDisplay.style.color = '#ff6b9d';
                                 questionText.innerHTML = `
                                     <div style="color: #ff6b9d; font-size: 18px;">
-                                        Дұрыс емес, Жанм! Қайталап көр 😊
+                                        Not quite, Inna! Try again 😊
                                     </div>
                                 `;
                                 
@@ -1549,7 +1499,7 @@
                         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
                         animation: fadeIn 0.5s ease-out;
                     `;
-                    easterEggMsg.innerHTML = '🎉 Сен жасырын видеоны таптың, Жанм! 💕';
+                    easterEggMsg.innerHTML = '🎉 You found the secret video, Inna! 💕';
                     document.body.appendChild(easterEggMsg);
                     
                     setTimeout(() => {
@@ -1568,26 +1518,30 @@
         const photo2 = document.querySelector('.photo-2');
         
         // Photo 1 - Catch Hearts Game
-        const startGame1 = (e) => {
+        photo1.addEventListener('click', (e) => {
             e.stopPropagation();
             e.preventDefault();
             startCatchHeartsGame();
-        };
+        });
         
-        photo1.addEventListener('click', startGame1);
-        photo1.addEventListener('touchstart', startGame1, { passive: false });
-        photo1.addEventListener('touchend', startGame1, { passive: false });
+        photo1.addEventListener('touchend', (e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            startCatchHeartsGame();
+        });
         
-        // Photo 2 - Word Game
-        const startGame2 = (e) => {
+        // Photo 2 - Spin Wheel Game
+        photo2.addEventListener('click', (e) => {
             e.stopPropagation();
             e.preventDefault();
             startSpinWheelGame();
-        };
+        });
         
-        photo2.addEventListener('click', startGame2);
-        photo2.addEventListener('touchstart', startGame2, { passive: false });
-        photo2.addEventListener('touchend', startGame2, { passive: false });
+        photo2.addEventListener('touchend', (e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            startSpinWheelGame();
+        });
 
         // Try to play music immediately when page loads
         window.addEventListener('load', () => {
