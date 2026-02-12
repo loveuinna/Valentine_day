@@ -351,36 +351,67 @@
         .game-container {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 20px;
-            padding: 30px;
+            padding: 20px;
             box-shadow: 0 20px 60px rgba(255, 107, 157, 0.5);
             text-align: center;
-            max-width: 90%;
-            width: 500px;
+            max-width: 95%;
+            width: 450px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        @media (max-width: 480px) {
+            .game-container {
+                padding: 15px;
+                width: 90%;
+                max-height: 85vh;
+            }
         }
 
         .game-title {
             color: white;
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 480px) {
+            .game-title {
+                font-size: 24px;
+                margin-bottom: 10px;
+            }
         }
 
         .game-score {
             color: white;
-            font-size: 24px;
-            margin-bottom: 20px;
+            font-size: 20px;
+            margin-bottom: 15px;
             font-weight: 600;
+        }
+
+        @media (max-width: 480px) {
+            .game-score {
+                font-size: 18px;
+                margin-bottom: 10px;
+            }
         }
 
         .game-area {
             position: relative;
             width: 100%;
-            height: 400px;
+            height: 350px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 15px;
             overflow: hidden;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 480px) {
+            .game-area {
+                height: 280px;
+                margin-bottom: 10px;
+            }
         }
 
         .falling-heart {
@@ -457,7 +488,7 @@
 
         .photo-1:hover {
             transform: rotate(8deg) scale(1.1);
-            z-index: 6;
+            z-index: 16;
         }
 
         .photo-2 {
@@ -469,7 +500,7 @@
 
         .photo-2:hover {
             transform: translateY(-50%) rotate(-6deg) scale(1.1);
-            z-index: 6;
+            z-index: 16;
         }
 
         .photo-frame img {
@@ -536,11 +567,12 @@
                         0 0 20px rgba(255, 107, 157, 0.3);
             border: 8px solid rgba(255, 255, 255, 0.9);
             transition: transform 0.3s ease;
-            z-index: 5;
+            z-index: 15;
             animation: fadeIn 1s ease-out, photoGlow 3s ease-in-out infinite;
             cursor: pointer;
             touch-action: manipulation;
             -webkit-tap-highlight-color: transparent;
+            pointer-events: auto;
         }
 
         @keyframes photoGlow {
@@ -647,19 +679,18 @@
             }
 
             .photo-frame {
-                width: 100px;
-                height: 120px;
+                width: 110px;
+                height: 135px;
                 border: 5px solid rgba(255, 255, 255, 0.9);
             }
 
             .photo-1 {
-                top: 40px;
-                right: 15px;
+                top: 50px;
+                right: 25px;
             }
 
             .photo-2 {
-                top: 45%;
-                left: 15px;
+                left: 25px;
             }
 
             .video-container video {
@@ -1537,30 +1568,26 @@
         const photo2 = document.querySelector('.photo-2');
         
         // Photo 1 - Catch Hearts Game
-        photo1.addEventListener('click', (e) => {
+        const startGame1 = (e) => {
             e.stopPropagation();
             e.preventDefault();
             startCatchHeartsGame();
-        });
+        };
         
-        photo1.addEventListener('touchend', (e) => {
-            e.stopPropagation();
-            e.preventDefault();
-            startCatchHeartsGame();
-        });
+        photo1.addEventListener('click', startGame1);
+        photo1.addEventListener('touchstart', startGame1, { passive: false });
+        photo1.addEventListener('touchend', startGame1, { passive: false });
         
-        // Photo 2 - Spin Wheel Game
-        photo2.addEventListener('click', (e) => {
-            e.stopPropagation();
-            e.preventDefault();
-            startSpinWheelGame();
-        });
-        
-        photo2.addEventListener('touchend', (e) => {
+        // Photo 2 - Word Game
+        const startGame2 = (e) => {
             e.stopPropagation();
             e.preventDefault();
             startSpinWheelGame();
-        });
+        };
+        
+        photo2.addEventListener('click', startGame2);
+        photo2.addEventListener('touchstart', startGame2, { passive: false });
+        photo2.addEventListener('touchend', startGame2, { passive: false });
 
         // Try to play music immediately when page loads
         window.addEventListener('load', () => {
