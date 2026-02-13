@@ -121,8 +121,8 @@
             padding: 20px;
             max-width: 600px;
             width: 90%;
-            /* Moved text down slightly to clear top photo */
-            margin-top: 100px; 
+            /* Adjusted margin-top for better spacing */
+            margin-top: 120px; 
             pointer-events: none;
         }
 
@@ -159,8 +159,8 @@
             align-items: center;
             gap: 20px;
             flex-wrap: wrap;
-            /* SIGNIFICANTLY increased margin to create space for the left photo */
-            margin-top: 220px;
+            /* Adjusted margin-top for better spacing */
+            margin-top: 200px;
         }
 
         /* Button styling */
@@ -483,13 +483,12 @@
         /* Sparkle effect */
         .photo-frame {
             position: fixed;
-            width: 150px;
-            height: 180px;
-            border-radius: 10px;
-            overflow: visible;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4),
-                        0 0 20px rgba(255, 107, 157, 0.3);
-            border: 8px solid rgba(255, 255, 255, 0.9);
+            width: 160px;
+            height: 200px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 4px solid #ff6b9d;
             transition: transform 0.3s ease;
             z-index: 100;
             animation: fadeIn 1s ease-out, photoGlow 3s ease-in-out infinite;
@@ -501,30 +500,30 @@
         /* Photo 1: Left side, between text and buttons */
         .photo-1 {
             top: auto;        /* Let top be handled by bottom/media queries */
-            bottom: 250px;    /* Positioned up from the bottom */
-            left: 20px;       /* Stuck to the left */
+            bottom: 260px;    /* Adjusted for better spacing */
+            left: 10px;       /* Stuck to the left */
             right: auto;
-            transform: rotate(-12deg);
+            transform: rotate(-8deg);
             z-index: 5;
         }
 
         .photo-1:hover {
-            transform: rotate(-12deg) scale(1.1);
+            transform: rotate(-8deg) scale(1.1);
             z-index: 6;
         }
 
         /* Photo 2: Top right, between progress and text */
         .photo-2 {
-            top: 100px;
+            top: 120px;
             bottom: auto;
-            right: 20px;
+            right: 10px;
             left: auto;
-            transform: rotate(12deg);
+            transform: rotate(8deg);
             z-index: 4;
         }
 
         .photo-2:hover {
-            transform: rotate(12deg) scale(1.1);
+            transform: rotate(8deg) scale(1.1);
             z-index: 6;
         }
 
@@ -532,6 +531,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            filter: contrast(1.1) brightness(1.05); /* Added for better aesthetics */
         }
 
         /* Decorative hearts around photos */
@@ -583,11 +583,11 @@
 
         @keyframes photoGlow {
             0%, 100% {
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4),
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2),
                            0 0 20px rgba(255, 107, 157, 0.3);
             }
             50% {
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4),
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2),
                            0 0 30px rgba(255, 107, 157, 0.6),
                            0 0 40px rgba(255, 182, 193, 0.4);
             }
@@ -682,32 +682,32 @@
 
             .button-container {
                 min-height: 180px;
-                /* Even more margin on very small screens if needed */
-                margin-top: 240px; 
+                /* Adjusted margin-top for mobile */
+                margin-top: 220px; 
             }
 
             .photo-frame {
-                width: 90px;
-                height: 110px;
-                border: 5px solid rgba(255, 255, 255, 0.9);
+                width: 110px;
+                height: 130px;
+                border: 3px solid #ff6b9d;
             }
 
             /* Mobile Photo 1: Left, between text and buttons */
             .photo-1 {
                 top: auto;
-                bottom: 220px; /* Positioned just above the buttons */
-                left: 15px;
+                bottom: 240px; /* Adjusted for better spacing */
+                left: 10px;
                 right: auto;
-                transform: rotate(-10deg);
+                transform: rotate(-8deg);
             }
 
             /* Mobile Photo 2: Top Right, between progress and text */
             .photo-2 {
-                top: 85px;
+                top: 100px;
                 bottom: auto;
                 left: auto;
-                right: 15px;
-                transform: rotate(10deg);
+                right: 10px;
+                transform: rotate(8deg);
             }
 
             .video-container video {
@@ -938,88 +938,115 @@
             const maxX = container.width - button.width - 20;
             const maxY = container.height - button.height - 20;
             
-            // Generate random position
-            const randomX = Math.random() * maxX;
-            const randomY = Math.random() * maxY;
-            
-            // Apply position
-            noBtn.style.left = randomX + 'px';
-            noBtn.style.top = randomY + 'px';
-            
-            // Grow Yes button slightly
-            yesButtonScale += 0.1;
+            noBtn.style.left = Math.random() * maxX + 'px';
+            noBtn.style.top = Math.random() * maxY + 'px';
+
+            // Grow Yes button
+            yesButtonScale += 0.2;
             yesBtn.style.transform = `scale(${yesButtonScale})`;
+
+            // Show sad message
+            const sadMessages = [
+                "Why? 🥺",
+                "But I love you... 💔",
+                "Please reconsider 😢",
+                "You're breaking my heart 😭",
+                "One more chance? 🙏"
+            ];
             
-            // Add "Why?" message at random position
             const whyMsg = document.createElement('div');
             whyMsg.classList.add('why-message');
-            whyMsg.textContent = 'Why? 😢';
-            whyMsg.style.fontSize = (Math.random() * 20 + 20) + 'px';
-            whyMsg.style.left = (Math.random() * 80 + 10) + '%';
-            whyMsg.style.top = (Math.random() * 80 + 10) + '%';
-            whyMsg.style.transform = `rotate(${Math.random() * 40 - 20}deg)`;
+            whyMsg.textContent = sadMessages[Math.min(noClickCount - 1, sadMessages.length - 1)];
+            whyMsg.style.left = Math.random() * 80 + 10 + '%';
+            whyMsg.style.top = Math.random() * 80 + 10 + '%';
+            whyMsg.style.fontSize = (Math.random() * 10 + 20) + 'px';
             document.body.appendChild(whyMsg);
-        }
-
-        // Create exploding hearts animation
-        function createExplodingHearts() {
-            const hearts = ['💕', '💖', '💗', '💓', '💝', '💞', '❤️', '💗'];
-            const centerX = window.innerWidth / 2;
-            const centerY = window.innerHeight / 2;
             
-            // Create 50 hearts exploding from center
-            for (let i = 0; i < 50; i++) {
-                setTimeout(() => {
-                    const heart = document.createElement('div');
-                    heart.classList.add('exploding-heart');
-                    heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
-                    
-                    // Random angle and distance
-                    const angle = Math.random() * Math.PI * 2;
-                    const distance = Math.random() * 400 + 200;
-                    const endX = centerX + Math.cos(angle) * distance;
-                    const endY = centerY + Math.sin(angle) * distance;
-                    
-                    heart.style.left = centerX + 'px';
-                    heart.style.top = centerY + 'px';
-                    heart.style.fontSize = (Math.random() * 30 + 20) + 'px';
-                    heart.style.setProperty('--endX', endX + 'px');
-                    heart.style.setProperty('--endY', endY + 'px');
-                    heart.style.animationDuration = (Math.random() * 1 + 1.5) + 's';
-                    
-                    document.body.appendChild(heart);
-                    
-                    setTimeout(() => heart.remove(), 2500);
-                }, i * 20);
+            setTimeout(() => {
+                whyMsg.style.animation = 'fadeOut 0.5s ease-out forwards';
+                setTimeout(() => whyMsg.remove(), 500);
+            }, 1500);
+
+            // Trigger mini-game after 7 No clicks
+            if (noClickCount === 7) {
+                startCatchHeartsGame();
+            }
+
+            // Trigger word game after 9 No clicks
+            if (noClickCount === 9) {
+                startSpinWheelGame();
+            }
+
+            // Force yes after 10 clicks
+            if (noClickCount >= 10) {
+                noBtn.remove();
+                nextQuestion();
             }
         }
 
-        // Transition to next question
-        async function nextQuestion() {
-            // Start music on first yes click
-            if (!musicStarted) {
-                bgMusic.play().then(() => {
-                    console.log('Music started successfully!');
-                    musicStarted = true;
-                }).catch(e => {
-                    console.log('Music autoplay prevented:', e);
-                    console.log('Music will try to play again...');
-                });
-            }
-            
-            // Remove all "Why?" messages
-            document.querySelectorAll('.why-message').forEach(msg => msg.remove());
-
-            // Update progress bar
-            const progress = ((currentQuestion + 1) / questions.length) * 100;
+        // Update progress bar
+        function updateProgress() {
+            const progress = (currentQuestion / questions.length) * 100;
             document.getElementById('progressBar').style.width = progress + '%';
             document.getElementById('progressText').textContent = `Love Quest Progress: ${Math.round(progress)}%`;
-            
-            // Update progress hearts
-            const progressHearts = document.querySelectorAll('.progress-heart');
-            progressHearts[currentQuestion].textContent = '❤️';
-            
-            // Change background color gradually to more pink
+
+            // Fill hearts
+            const hearts = document.querySelectorAll('.progress-heart');
+            const filledHearts = Math.floor(progress / 25);
+            hearts.forEach((heart, index) => {
+                if (index < filledHearts) {
+                    heart.textContent = '💖';
+                    heart.style.color = '#ff6b9d';
+                    heart.style.animation = 'bounce 0.5s ease';
+                    setTimeout(() => heart.style.animation = '', 500);
+                } else {
+                    heart.textContent = '🤍';
+                    heart.style.color = 'white';
+                }
+            });
+        }
+
+        // Create exploding hearts
+        function createExplodingHearts(count = 20) {
+            for (let i = 0; i < count; i++) {
+                const hearts = ['💕', '💖', '💗', '💓', '💝', '💞'];
+                const heart = document.createElement('div');
+                heart.classList.add('exploding-heart');
+                heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+                
+                const centerX = window.innerWidth / 2;
+                const centerY = window.innerHeight / 2;
+                const angle = Math.random() * Math.PI * 2;
+                const distance = Math.random() * 300 + 200;
+                const endX = centerX + Math.cos(angle) * distance;
+                const endY = centerY + Math.sin(angle) * distance;
+                
+                heart.style.left = centerX + 'px';
+                heart.style.top = centerY + 'px';
+                heart.style.setProperty('--endX', endX + 'px');
+                heart.style.setProperty('--endY', endY + 'px');
+                heart.style.animationDuration = (Math.random() * 0.5 + 1.5) + 's';
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 2000);
+            }
+        }
+
+        // Next question handler
+        async function nextQuestion() {
+            if (currentQuestion === 0) {
+                // Start music if not playing
+                if (!musicStarted) {
+                    bgMusic.play();
+                    musicStarted = true;
+                }
+            }
+
+            updateProgress();
+
+            // Change background to more pink
             const pinkness = currentQuestion / questions.length;
             document.body.style.background = `linear-gradient(135deg, 
                 rgb(${102 + pinkness * 153}, ${126 - pinkness * 40}, ${234 - pinkness * 74}), 
