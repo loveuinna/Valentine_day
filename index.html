@@ -159,8 +159,8 @@
             align-items: center;
             gap: 20px;
             flex-wrap: wrap;
-            /* Adjusted margin-top for better spacing */
-            margin-top: 200px;
+            /* Adjusted margin-top to move buttons higher */
+            margin-top: 150px;
         }
 
         /* Button styling */
@@ -682,8 +682,8 @@
 
             .button-container {
                 min-height: 180px;
-                /* Adjusted margin-top for mobile */
-                margin-top: 220px; 
+                /* Adjusted margin-top to move buttons higher on mobile */
+                margin-top: 170px; 
             }
 
             .photo-frame {
@@ -1037,13 +1037,15 @@
         // Next question handler
         async function nextQuestion() {
             if (currentQuestion === 0) {
-                // Start music if not playing
                 if (!musicStarted) {
-                    bgMusic.play();
-                    musicStarted = true;
+                    bgMusic.play().then(() => musicStarted = true).catch(() => {});
                 }
             }
 
+            // FIX: Increment first, then update progress
+            currentQuestion++;
+
+            // Update progress bar and hearts
             updateProgress();
 
             // Change background to more pink
@@ -1053,7 +1055,6 @@
                 rgb(${118 + pinkness * 137}, ${75 + pinkness * 32}, ${162 - pinkness * 52}), 
                 #f093fb)`;
 
-            // Create exploding hearts animation
             createExplodingHearts();
 
             // Fade out current content
@@ -1062,28 +1063,23 @@
             noBtn.classList.add('fade-out');
 
             setTimeout(() => {
-                currentQuestion++;
-
                 if (currentQuestion < questions.length) {
-                    // Update question
                     question.textContent = questions[currentQuestion];
                     question.classList.remove('fade-out');
                     question.classList.add('fade-in');
 
-                    // Reset and show buttons
                     yesBtn.classList.remove('fade-out');
                     yesBtn.classList.add('fade-in');
                     noBtn.classList.remove('fade-out');
                     noBtn.classList.add('fade-in');
-                    
-                    // Reset No button position
+
+                    // Reset No button
                     noBtn.style.left = '';
                     noBtn.style.top = '';
                     noBtn.style.position = 'relative';
                     noBtn.textContent = 'No 😈';
                     noClickCount = 0;
-                    
-                    // Reset Yes button scale
+
                     yesButtonScale = 1;
                     yesBtn.style.transform = 'scale(1)';
 
@@ -1093,7 +1089,6 @@
                         noBtn.classList.remove('fade-in');
                     }, 600);
                 } else {
-                    // Final celebration
                     showFinalCelebration();
                 }
             }, 600);
