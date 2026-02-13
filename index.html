@@ -1385,11 +1385,11 @@
             let selectedLetters = [];
             
             container.innerHTML = `
-                <div class="game-title" id="wordGameTitle">💌 Build the Word! 💌</div>
-                <div class="game-score" style="min-height: 80px; font-size: 18px; line-height: 1.6; margin-bottom: 20px;" id="questionText"></div>
-                <div class="game-score" style="min-height: 50px; font-size: 24px; font-weight: 700; color: #feca57;" id="currentWord"></div>
-                <div class="game-area" id="letterGameArea" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px; padding: 30px 15px;"></div>
-                <button class="close-game-btn" onclick="this.parentElement.parentElement.remove()">Close</button>
+                <div class="game-title" id="wordGameTitle">💌 Сөзді құр! 💌</div>
+                <div class="game-score" style="min-height: 60px; font-size: 16px; line-height: 1.5; margin-bottom: 12px;" id="questionText"></div>
+                <div class="game-score" style="min-height: 40px; font-size: 20px; font-weight: 700; color: #feca57;" id="currentWord"></div>
+                <div class="game-area" id="letterGameArea" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px; padding: 12px 8px; overflow-y: auto;"></div>
+                <button class="close-game-btn" onclick="this.parentElement.parentElement.remove()">Жабу</button>
             `;
             
             overlay.appendChild(container);
@@ -1441,15 +1441,15 @@
                         background: linear-gradient(135deg, #ff6b9d, #c06c84);
                         color: white;
                         border: none;
-                        padding: 20px;
-                        border-radius: 15px;
-                        font-size: 28px;
+                        padding: 12px;
+                        border-radius: 12px;
+                        font-size: 20px;
                         font-weight: 700;
                         cursor: pointer;
                         transition: all 0.3s ease;
-                        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-                        min-width: 60px;
-                        min-height: 60px;
+                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+                        min-width: 45px;
+                        min-height: 45px;
                         animation: fadeIn 0.5s ease-out ${index * 0.1}s backwards;
                     `;
                     
