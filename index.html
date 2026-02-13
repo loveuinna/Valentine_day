@@ -121,8 +121,8 @@
             padding: 20px;
             max-width: 600px;
             width: 90%;
-            /* Increased margin to push text down, making room for photos above */
-            margin-top: 120px; 
+            /* Moved text down slightly to clear top photo */
+            margin-top: 100px; 
             pointer-events: none;
         }
 
@@ -159,8 +159,8 @@
             align-items: center;
             gap: 20px;
             flex-wrap: wrap;
-            /* Added margin to push buttons lower */
-            margin-top: 60px;
+            /* SIGNIFICANTLY increased margin to create space for the left photo */
+            margin-top: 220px;
         }
 
         /* Button styling */
@@ -498,33 +498,33 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* Updated Photo 1 Position */
+        /* Photo 1: Left side, between text and buttons */
         .photo-1 {
-            top: 100px;       /* Moved to top area */
-            bottom: auto;     /* Removed bottom positioning */
-            right: 40px;      /* Moved to right side */
-            left: auto;       /* Removed left positioning */
-            transform: rotate(-6deg); /* SWAPPED ANGLE: Was 8deg, now -6deg */
+            top: auto;        /* Let top be handled by bottom/media queries */
+            bottom: 250px;    /* Positioned up from the bottom */
+            left: 20px;       /* Stuck to the left */
+            right: auto;
+            transform: rotate(-12deg);
             z-index: 5;
         }
 
         .photo-1:hover {
-            transform: rotate(-6deg) scale(1.1);
+            transform: rotate(-12deg) scale(1.1);
             z-index: 6;
         }
 
-        /* Updated Photo 2 Position */
+        /* Photo 2: Top right, between progress and text */
         .photo-2 {
-            top: 110px;       /* Moved to top area */
-            bottom: auto;     /* Removed bottom positioning */
-            right: 120px;     /* Moved to right side (offset from photo 1) */
-            left: auto;       /* Removed left positioning */
-            transform: rotate(8deg); /* SWAPPED ANGLE: Was -6deg, now 8deg */
+            top: 100px;
+            bottom: auto;
+            right: 20px;
+            left: auto;
+            transform: rotate(12deg);
             z-index: 4;
         }
 
         .photo-2:hover {
-            transform: rotate(8deg) scale(1.1);
+            transform: rotate(12deg) scale(1.1);
             z-index: 6;
         }
 
@@ -682,6 +682,8 @@
 
             .button-container {
                 min-height: 180px;
+                /* Even more margin on very small screens if needed */
+                margin-top: 240px; 
             }
 
             .photo-frame {
@@ -690,21 +692,22 @@
                 border: 5px solid rgba(255, 255, 255, 0.9);
             }
 
-            /* Mobile Photo Positioning - Top Right */
+            /* Mobile Photo 1: Left, between text and buttons */
             .photo-1 {
-                top: 85px;       /* Below progress bar */
-                bottom: auto;
-                left: auto;
-                right: 20px;     /* On the right */
-                transform: rotate(-6deg); /* Swapped Angle */
+                top: auto;
+                bottom: 220px; /* Positioned just above the buttons */
+                left: 15px;
+                right: auto;
+                transform: rotate(-10deg);
             }
 
+            /* Mobile Photo 2: Top Right, between progress and text */
             .photo-2 {
-                top: 95px;       /* Slightly lower */
+                top: 85px;
                 bottom: auto;
                 left: auto;
-                right: 70px;     /* Offset to the left of photo 1 */
-                transform: rotate(8deg);  /* Swapped Angle */
+                right: 15px;
+                transform: rotate(10deg);
             }
 
             .video-container video {
@@ -718,21 +721,14 @@
                 height: 150px;
             }
 
-            /* Tablet Photo Positioning */
             .photo-1 {
-                top: 100px;
-                bottom: auto;
-                left: auto;
-                right: 40px;
-                transform: rotate(-6deg);
+                bottom: 250px;
+                left: 30px;
             }
 
             .photo-2 {
-                top: 110px;
-                bottom: auto;
-                left: auto;
-                right: 120px;
-                transform: rotate(8deg);
+                top: 100px;
+                right: 30px;
             }
         }
     </style>
